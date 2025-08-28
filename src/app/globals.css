@@ -29,14 +29,14 @@
     --chart-3: 217 60% 61%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --sidebar-background: 220 100% 98%;
-    --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 217 100% 41%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 217 33% 90%;
-    --sidebar-accent-foreground: 222 47% 11%;
-    --sidebar-border: 217 33% 88%;
-    --sidebar-ring: 217 100% 41%;
+    --sidebar-background: 217 100% 41%; /* brand.DEFAULT */
+    --sidebar-foreground: 0 0% 100%; /* White */
+    --sidebar-primary: 210 40% 98%; /* White text for active items */
+    --sidebar-primary-foreground: 217 100% 41%; /* brand.DEFAULT for active item text */
+    --sidebar-accent: 217 91% 60%; /* brand.light for hover */
+    --sidebar-accent-foreground: 0 0% 100%; /* White text on hover */
+    --sidebar-border: 217 100% 41%; /* brand.DEFAULT */
+    --sidebar-ring: 210 40% 98%; /* White */
   }
   .dark {
     --background: 222 47% 11%;
