@@ -66,7 +66,6 @@ export default function DashboardLayout({
           <SidebarHeader className="p-4">
             <div className="flex items-center gap-2 px-6 py-4">
               <Image src="/images/logo.png" width={32} height={32} alt="AgileFlow logo" className="h-8 w-8" />
-              <span className="text-brand font-bold text-lg">AgileFlow</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -131,7 +130,7 @@ export default function DashboardLayout({
             </DropdownMenu>
           </SidebarFooter>
         </Sidebar>
-        <SidebarInset>
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
           <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
             <SidebarTrigger className="md:hidden" />
             <div className="flex-1">
@@ -140,8 +139,8 @@ export default function DashboardLayout({
               </h1>
             </div>
           </header>
-          <main className="flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
-        </SidebarInset>
+          <div className="p-4 sm:p-6">{children}</div>
+        </main>
       </div>
     </SidebarProvider>
   );
