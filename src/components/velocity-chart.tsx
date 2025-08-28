@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -38,7 +39,7 @@ export function VelocityChart() {
       <CardHeader>
         <CardTitle>Team Velocity</CardTitle>
         <CardDescription>
-          Story points planned vs. completed over the last few sprints.
+          Story points completed over the last few sprints.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -57,8 +58,6 @@ export function VelocityChart() {
                     borderColor: 'hsl(var(--border))',
                   }}
                 />
-                <Legend wrapperStyle={{fontSize: "14px"}}/>
-                <Bar dataKey="planned" fill="hsl(var(--secondary))" name="Planned" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="completed" fill="hsl(var(--primary))" name="Completed" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
