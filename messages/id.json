@@ -2,13 +2,13 @@
   "Dashboard": {
     "title": "Dasbor",
     "subtitle": "Lacak progres sprint Anda di sini.",
-    "burndown": "Grafik Burndown Sprint",
-    "velocity": "Kecepatan Tim",
-    "cfd": "Diagram Aliran Kumulatif",
-    "switch": "Ubah ke Bahasa Inggris",
-    "switchLocale": "en",
     "reports": "Laporan",
     "reportsDescription": "Visualisasi performa sprint.",
-    "cfdDescription": "Menunjukkan distribusi status pekerjaan dari waktu ke waktu."
+    "cfd": "Diagram Aliran Kumulatif",
+    "cfdDescription": "Menunjukkan distribusi status pekerjaan dari waktu ke waktu.",
+    "burndown": "Grafik Burndown Sprint",
+    "velocity": "Kecepatan Tim",
+    "switch": "Ubah ke Bahasa Inggris",
+    "switchLocale": "en"
   }
 }
