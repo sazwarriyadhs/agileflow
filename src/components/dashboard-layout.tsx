@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -15,6 +16,7 @@ import {
   Bot,
   BarChart,
   ClipboardList,
+  LogOut,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -38,6 +40,8 @@ import {
   SidebarInset,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
+import { logout } from '@/lib/actions';
+import { getSession } from '@/lib/auth';
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -51,12 +55,30 @@ const menuItems = [
   { href: '/dashboard/summary', label: 'Sprint Summary', icon: ClipboardList },
 ];
 
+type User = {
+  name: string;
+  email: string;
+}
+
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [user, setUser] = React.useState<User | null>(null);
+  
+  React.useEffect(() => {
+    getSession().then(session => {
+      if (session?.user) {
+        setUser(session.user);
+      }
+    });
+  }, []);
+
+  const getInitials = (name: string) => {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  }
 
   return (
     <SidebarProvider defaultOpen>
@@ -86,18 +108,19 @@ export default function DashboardLayout({
             </SidebarMenu>
           </SidebarContent>
           <SidebarFooter className="p-4">
+           {user && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="justify-start w-full p-2 h-auto">
                   <div className="flex items-center gap-3">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src="https://picsum.photos/100" alt="User" data-ai-hint="person" />
-                      <AvatarFallback>SM</AvatarFallback>
+                      <AvatarImage src={`https://picsum.photos/seed/${user.email}/100`} alt={user.name} data-ai-hint="person" />
+                      <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
                     </Avatar>
                     <div className="text-left group-data-[collapsible=icon]:hidden">
-                      <p className="font-medium">Scrum Master</p>
+                      <p className="font-medium">{user.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        user@agileflow.com
+                        {user.email}
                       </p>
                     </div>
                   </div>
@@ -106,9 +129,9 @@ export default function DashboardLayout({
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">Scrum Master</p>
+                    <p className="text-sm font-medium leading-none">{user.name}</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      user@agileflow.com
+                      {user.email}
                     </p>
                   </div>
                 </DropdownMenuLabel>
@@ -122,11 +145,17 @@ export default function DashboardLayout({
                   <span>Settings</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <span>Log out</span>
-                </DropdownMenuItem>
+                <form action={logout}>
+                    <DropdownMenuItem asChild>
+                        <button type="submit" className="w-full">
+                            <LogOut className="mr-2 h-4 w-4" />
+                            <span>Log out</span>
+                        </button>
+                    </DropdownMenuItem>
+                </form>
               </DropdownMenuContent>
             </DropdownMenu>
+           )}
           </SidebarFooter>
         </Sidebar>
         <SidebarInset>
