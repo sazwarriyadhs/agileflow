@@ -1,4 +1,5 @@
-import { NextIntlClientProvider, useMessages } from 'next-intl';
+
+import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -26,7 +27,7 @@ export default function RootLayout({
 }) {
   let messages;
   try {
-    messages = require(`../../locales/${locale}.json`);
+    messages = require(`../../messages/${locale}.json`);
   } catch (error) {
     notFound();
   }
