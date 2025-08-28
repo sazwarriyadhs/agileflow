@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { velocityData } from '@/lib/data';
 
 type VelocityData = {
   sprint: string;
@@ -17,21 +18,14 @@ export function VelocityChart() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch('/api/sprint-velocity');
-        if (!res.ok) {
-          throw new Error('Failed to fetch velocity data');
-        }
-        const jsonData = await res.json();
-        setData(jsonData);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+    try {
+      // Using static data instead of fetching from API
+      setData(velocityData);
+    } catch (err: any) {
+      setError("Failed to load velocity data");
+    } finally {
+      setLoading(false);
     }
-    fetchData();
   }, []);
 
   return (
@@ -58,6 +52,8 @@ export function VelocityChart() {
                     borderColor: 'hsl(var(--border))',
                   }}
                 />
+                <Legend wrapperStyle={{fontSize: "14px"}}/>
+                <Bar dataKey="planned" fill="hsl(var(--secondary))" name="Planned" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="completed" fill="hsl(var(--primary))" name="Completed" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>

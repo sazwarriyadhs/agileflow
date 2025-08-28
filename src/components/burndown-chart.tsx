@@ -4,10 +4,12 @@
 import { useEffect, useState } from 'react';
 import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { burndownData } from '@/lib/data';
 
 type BurndownData = {
-  log_date: string;
-  total_remaining_hours: number;
+  day: string;
+  remaining: number;
+  ideal: number;
 };
 
 export function BurndownChart() {
@@ -16,28 +18,14 @@ export function BurndownChart() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const sprintId = 'sprint-2'; // Example sprintId
-        const res = await fetch(`/api/sprint-burndown?sprintId=${sprintId}`);
-        if (!res.ok) {
-          throw new Error('Failed to fetch burndown data');
-        }
-        const jsonData = await res.json();
-        // Assuming the API returns data with 'log_date' and 'total_remaining_hours'.
-        // We'll also format the date for better readability.
-        const formattedData = jsonData.map((item: any) => ({
-          ...item,
-          log_date: new Date(item.log_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-        }));
-        setData(formattedData);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+    try {
+      // Using static data instead of fetching from API
+      setData(burndownData);
+    } catch (err: any) {
+      setError("Failed to load burndown data");
+    } finally {
+      setLoading(false);
     }
-    fetchData();
   }, []);
 
   return (
@@ -56,7 +44,7 @@ export function BurndownChart() {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="log_date" stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} />
+                <XAxis dataKey="day" stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickLine={false} axisLine={false} />
                 <Tooltip
                   contentStyle={{
@@ -65,7 +53,8 @@ export function BurndownChart() {
                   }}
                 />
                 <Legend wrapperStyle={{fontSize: "14px"}}/>
-                <Line type="monotone" dataKey="total_remaining_hours" name="Remaining Hours" stroke="hsl(var(--primary))" strokeWidth={2} />
+                <Line type="monotone" dataKey="remaining" name="Remaining Effort" stroke="hsl(var(--primary))" strokeWidth={2} />
+                <Line type="monotone" dataKey="ideal" name="Ideal Burndown" stroke="hsl(var(--muted-foreground))" strokeWidth={2} strokeDasharray="5 5" />
               </LineChart>
             </ResponsiveContainer>
           )}
@@ -74,4 +63,3 @@ export function BurndownChart() {
     </Card>
   );
 }
-
