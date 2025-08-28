@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { sprintSummaryData } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { FileDown } from 'lucide-react';
 
@@ -27,14 +26,21 @@ export default function SprintSummaryPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      // Using static data instead of fetching from API
-      setData(sprintSummaryData);
-    } catch (err: any) {
-      setError("Failed to load summary data");
-    } finally {
-      setLoading(false);
+    async function fetchData() {
+        try {
+          const response = await fetch('/api/sprint-summary');
+          if (!response.ok) {
+            throw new Error('Failed to fetch summary data');
+          }
+          const summaryData = await response.json();
+          setData(summaryData);
+        } catch (err: any) {
+          setError("Failed to load summary data");
+        } finally {
+          setLoading(false);
+        }
     }
+    fetchData();
   }, []);
 
   const exportToCSV = () => {

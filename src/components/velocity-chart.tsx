@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { velocityData } from '@/lib/data';
 
 type VelocityData = {
   sprint: string;
@@ -18,14 +17,26 @@ export function VelocityChart() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      // Using static data instead of fetching from API
-      setData(velocityData);
-    } catch (err: any) {
-      setError("Failed to load velocity data");
-    } finally {
-      setLoading(false);
+    async function fetchData() {
+        try {
+          const response = await fetch('/api/sprint-velocity');
+          if (!response.ok) {
+            throw new Error('Failed to fetch velocity data');
+          }
+          const rawData = await response.json();
+          const formattedData = rawData.map((d: any) => ({
+            sprint: `Sprint ${d.sprint_number}`,
+            planned: d.planned_effort,
+            completed: d.completed_effort,
+          }));
+          setData(formattedData);
+        } catch (err: any) {
+          setError("Failed to load velocity data");
+        } finally {
+          setLoading(false);
+        }
     }
+    fetchData();
   }, []);
 
   return (

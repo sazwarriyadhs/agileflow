@@ -61,31 +61,3 @@ export const sprints: Sprint[] = [
     stories: userStories.filter(s => ['AG-2', 'AG-3', 'AG-10'].includes(s.id)),
   },
 ];
-
-export const velocityData = [
-  { sprint: 'Sprint 1', planned: 10, completed: 8 },
-  { sprint: 'Sprint 2', planned: 15, completed: 12 },
-  { sprint: 'Sprint 3', planned: 13, completed: 13 },
-  { sprint: 'Sprint 4', planned: 18, completed: 15 },
-  { sprint: 'Sprint 5', planned: 20, completed: 18 },
-];
-
-export const burndownData = [
-  { day: 'Day 1', remaining: 40, ideal: 40 },
-  { day: 'Day 2', remaining: 38, ideal: 36 },
-  { day: 'Day 3', remaining: 32, ideal: 32 },
-  { day: 'Day 4', remaining: 28, ideal: 28 },
-  { day: 'Day 5', remaining: 25, ideal: 24 },
-  { day: 'Day 6', remaining: 20, ideal: 20 },
-  { day: 'Day 7', remaining: 18, ideal: 16 },
-  { day: 'Day 8', remaining: 12, ideal: 12 },
-  { day: 'Day 9', remaining: 8, ideal: 8 },
-  { day: 'Day 10', remaining: 4, ideal: 4 },
-  { day: 'Day 11', remaining: 0, ideal: 0 },
-];
-
-export const sprintSummaryData = [
-    { sprint_name: 'Sprint 1 - Foundation', total_tasks: 2, completed_tasks: 2, progress_percent: 100 },
-    { sprint_name: 'Sprint 2 - Core Features MVP', total_tasks: 3, completed_tasks: 1, progress_percent: 33 },
-    { sprint_name: 'Sprint 3 - Reporting & AI', total_tasks: 3, completed_tasks: 0, progress_percent: 0 },
-];

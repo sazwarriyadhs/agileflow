@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { Line, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { burndownData } from '@/lib/data';
 
 type BurndownData = {
   day: string;
@@ -18,14 +17,28 @@ export function BurndownChart() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      // Using static data instead of fetching from API
-      setData(burndownData);
-    } catch (err: any) {
-      setError("Failed to load burndown data");
-    } finally {
-      setLoading(false);
+    async function fetchData() {
+      try {
+        // In a real app, you'd fetch this from your API
+        // For now, we simulate a fetch
+        const response = await fetch('/api/sprint-burndown?sprintId=sprint-2');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const rawData = await response.json();
+        const formattedData = rawData.map((d: any) => ({
+            day: new Date(d.log_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric'}),
+            remaining: d.remaining_effort,
+            ideal: d.ideal_effort
+        }));
+        setData(formattedData);
+      } catch (err: any) {
+        setError("Failed to load burndown data");
+      } finally {
+        setLoading(false);
+      }
     }
+    fetchData();
   }, []);
 
   return (

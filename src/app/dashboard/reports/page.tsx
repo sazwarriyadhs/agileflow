@@ -8,9 +8,26 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { velocityData } from '@/lib/data';
+import { useEffect, useState } from 'react';
+
+type VelocityDataItem = {
+  sprint_number: number;
+  planned_effort: number;
+  completed_effort: number;
+};
 
 export default function ReportsPage() {
+  const [velocityData, setVelocityData] = useState<VelocityDataItem[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+        const response = await fetch('/api/sprint-velocity');
+        const data = await response.json();
+        setVelocityData(data);
+    }
+    fetchData();
+  }, []);
+
   const exportPDF = () => {
     const input = document.getElementById('report-section');
     if (!input) return;
@@ -32,9 +49,10 @@ export default function ReportsPage() {
   };
 
   const exportExcel = () => {
+    if(!velocityData.length) return;
     const data = [
       ['Sprint', 'Planned', 'Completed'],
-      ...velocityData.map(item => [item.sprint, item.planned, item.completed])
+      ...velocityData.map(item => [item.sprint_number, item.planned_effort, item.completed_effort])
     ];
   
     const worksheet = XLSX.utils.aoa_to_sheet(data);
