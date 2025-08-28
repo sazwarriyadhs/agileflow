@@ -1,32 +1,52 @@
-import { prisma } from '@/lib/prisma';
-import { USER_STORY_STATUS } from '@/lib/roles';
+'use client';
+
+import { useEffect, useState } from 'react';
 import { StatCard } from './stat-card';
 
-async function getStats() {
-    const backlogItems = await prisma.userStory.count({
-        where: { status: USER_STORY_STATUS.BACKLOG }
-    });
-    const inProgressItems = await prisma.userStory.count({
-        where: { status: USER_STORY_STATUS.IN_PROGRESS }
-    });
-    const completedItems = await prisma.userStory.count({
-        where: { status: USER_STORY_STATUS.DONE }
-    });
-    const latestVelocity = await prisma.sprintVelocity.findFirst({
-        orderBy: { sprintNumber: 'desc' }
-    });
+type StatsData = {
+    backlogItems: number;
+    inProgressItems: number;
+    completedItems: number;
+    velocity: number;
+};
 
-    return {
-        backlogItems,
-        inProgressItems,
-        completedItems,
-        velocity: latestVelocity?.completedEffort ?? 0
-    };
-}
+export function SprintStatistics() {
+  const [stats, setStats] = useState<StatsData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const response = await fetch('/api/sprint-stats');
+        if (!response.ok) {
+          throw new Error('Failed to fetch stats');
+        }
+        const data = await response.json();
+        setStats(data);
+      } catch (err) {
+        setError('Failed to load sprint statistics.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchStats();
+  }, []);
 
-export async function SprintStatistics() {
-  const stats = await getStats();
+  if (loading) {
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StatCard title="Backlog Items" value="Loading..." />
+            <StatCard title="In Progress" value="Loading..." />
+            <StatCard title="Completed" value="Loading..." />
+            <StatCard title="Sprint Velocity" value="Loading..." />
+        </div>
+    );
+  }
+
+  if (error || !stats) {
+    return <p className="text-destructive">{error || 'Could not load stats.'}</p>;
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
