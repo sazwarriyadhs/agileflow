@@ -24,7 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const messages = useMessages();
+  let messages;
+  try {
+    messages = require(`../../locales/${locale}.json`);
+  } catch (error) {
+    notFound();
+  }
 
   // Validate that the incoming `locale` parameter is valid
   if (!['en', 'id'].includes(locale)) {
