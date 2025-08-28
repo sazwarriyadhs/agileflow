@@ -4,7 +4,6 @@
 import * as React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   Settings,
   Users,
@@ -17,6 +16,7 @@ import {
   BarChart,
   ClipboardList,
   LogOut,
+  FolderGit2
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -42,6 +42,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { logout } from '@/lib/actions';
 import { getSession } from '@/lib/auth';
+import { Logo } from '@/components/icons';
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -85,8 +86,9 @@ export default function DashboardLayout({
       <div className="flex h-screen">
         <Sidebar>
           <SidebarHeader className="p-4">
-            <div className="flex items-center gap-2 px-6 py-4">
-              <Image src="/images/logo.png" width={300} height={71} alt="AgileFlow logo" />
+             <div className="flex items-center gap-2 px-2 py-4">
+              <Logo className="w-8 h-8 text-primary" />
+              <span className="text-xl font-semibold text-primary">AgileFlow</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -162,7 +164,7 @@ export default function DashboardLayout({
           <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
             <SidebarTrigger className="md:hidden" />
             <div className="flex-1">
-              <h1 className="text-lg font-semibold capitalize">
+              <h1 className="text-lg font-semibold capitalize text-primary">
                 {pathname.split('/').pop()?.replace('-', ' ') || 'Dashboard'}
               </h1>
             </div>
