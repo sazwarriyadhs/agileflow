@@ -17,7 +17,7 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  const switchLocale = (locale: 'en' | 'id') => {
+  const switchLocale = (locale: 'en') => {
     startTransition(() => {
       router.replace(pathname, { locale });
     });
@@ -34,9 +34,6 @@ export function LanguageSwitcher() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => switchLocale('en')}>
           English
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => switchLocale('id')}>
-          Bahasa Indonesia
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'id' }];
+  return [{ locale: 'en' }];
 }
 
 export default function RootLayout({
@@ -33,7 +33,7 @@ export default function RootLayout({
   }
 
   // Validate that the incoming `locale` parameter is valid
-  if (!['en', 'id'].includes(locale)) {
+  if (!['en'].includes(locale)) {
     notFound();
   }
 
