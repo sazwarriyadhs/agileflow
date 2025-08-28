@@ -1,0 +1,14 @@
+{
+  "Dashboard": {
+    "title": "Scrum Dashboard",
+    "subtitle": "Welcome to your sprint dashboard!",
+    "burndown": "Sprint Burndown Chart",
+    "velocity": "Team Velocity",
+    "cfd": "Cumulative Flow Diagram",
+    "switch": "Switch to Bahasa Indonesia",
+    "switchLocale": "id",
+    "reports": "Reports & Charts",
+    "reportsDescription": "Analyze your team's performance and sprint progress.",
+    "cfdDescription": "Visualize your workflow over time."
+  }
+}
