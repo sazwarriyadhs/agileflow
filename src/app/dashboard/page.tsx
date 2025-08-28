@@ -1,128 +1,111 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useState } from "react";
 
 export default function Dashboard() {
   const [messages, setMessages] = useState([
-    { sender: 'Alice', text: 'Hey team, daily standup at 9 AM.' },
-    { sender: 'Bob', text: 'Noted, thanks Alice!' },
+    { sender: "Alice", text: "Halo tim, bagaimana progres hari ini?" },
+    { sender: "Bob", text: "Sudah 70% selesai di modul API." },
   ]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
 
-  const handleSend = () => {
+  const sendMessage = () => {
     if (!newMessage.trim()) return;
-    setMessages([...messages, { sender: 'You', text: newMessage }]);
-    setNewMessage('');
+    setMessages([...messages, { sender: "You", text: newMessage }]);
+    setNewMessage("");
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
       {/* Project Overview */}
-      <Card className="col-span-2">
+      <Card className="lg:col-span-2">
         <CardHeader>
           <CardTitle>Project Overview</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>
-            Sprint 5 is in progress. Focus on finalizing the authentication
-            module and integrating payment gateway.
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Recent Activity */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-2 text-sm">
-            <li>✅ Login feature completed by Alice</li>
-            <li>🚧 Payment API integration in progress</li>
-            <li>📌 New backlog item added: "Export reports"</li>
+          <ul className="space-y-2">
+            <li>📌 Total Projects: 8</li>
+            <li>✅ Completed: 5</li>
+            <li>🚧 In Progress: 2</li>
+            <li>🕒 Pending: 1</li>
           </ul>
         </CardContent>
       </Card>
 
-      {/* Sprint Stats */}
-      <div className="col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Backlog</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">32</p>
-          </CardContent>
-        </Card>
+      {/* Recent Activity */}
+      <Card className="lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Recent Activity</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2">
+            <li>🔹 John updated the API documentation</li>
+            <li>🔹 Maria completed UI design</li>
+            <li>🔹 Sprint 5 started yesterday</li>
+          </ul>
+        </CardContent>
+      </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>In Progress</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">14</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Completed</CardTitle>
-          </CardHeader>
-          <CardContent>
+      {/* Sprint Statistics */}
+      <Card className="lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Sprint Statistics</CardTitle>
+        </CardHeader>
+        <CardContent className="grid grid-cols-2 gap-4">
+          <div className="p-4 bg-muted rounded-xl text-center">
+            <p className="text-2xl font-bold">24</p>
+            <p className="text-sm">Backlog Items</p>
+          </div>
+          <div className="p-4 bg-muted rounded-xl text-center">
+            <p className="text-2xl font-bold">12</p>
+            <p className="text-sm">In Progress</p>
+          </div>
+          <div className="p-4 bg-muted rounded-xl text-center">
             <p className="text-2xl font-bold">18</p>
-          </CardContent>
-        </Card>
+            <p className="text-sm">Completed</p>
+          </div>
+          <div className="p-4 bg-muted rounded-xl text-center">
+            <p className="text-2xl font-bold">32</p>
+            <p className="text-sm">Sprint Velocity</p>
+          </div>
+        </CardContent>
+      </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Velocity</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">25 pts</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Floating Chat Personnel */}
-      <div className="fixed bottom-4 right-4 w-80">
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="text-sm">Team Chat</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ScrollArea className="h-48 pr-2">
-              <div className="space-y-2 text-sm">
-                {messages.map((msg, idx) => (
-                  <div
-                    key={idx}
-                    className={`p-2 rounded-lg ${
-                      msg.sender === 'You'
-                        ? 'bg-primary text-primary-foreground ml-auto w-fit'
-                        : 'bg-muted w-fit'
-                    }`}
-                  >
-                    <strong>{msg.sender}: </strong>
-                    {msg.text}
-                  </div>
-                ))}
+      {/* Chat Personel */}
+      <Card className="lg:col-span-2 flex flex-col">
+        <CardHeader>
+          <CardTitle>Team Chat</CardTitle>
+        </CardHeader>
+        <CardContent className="flex-1 overflow-y-auto max-h-64 space-y-2">
+          <ScrollArea className="h-full pr-2">
+            {messages.map((msg, idx) => (
+              <div
+                key={idx}
+                className={`p-2 rounded-lg mb-2 ${
+                  msg.sender === "You"
+                    ? "bg-primary text-primary-foreground ml-auto w-fit"
+                    : "bg-muted w-fit"
+                }`}
+              >
+                <span className="font-semibold">{msg.sender}:</span> {msg.text}
               </div>
-            </ScrollArea>
-            <div className="flex mt-2 space-x-2">
-              <Input
-                placeholder="Type a message..."
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              />
-              <Button onClick={handleSend}>Send</Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            ))}
+          </ScrollArea>
+        </CardContent>
+        <div className="flex gap-2 p-4 border-t">
+          <Input
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="Type a message..."
+          />
+          <Button onClick={sendMessage}>Send</Button>
+        </div>
+      </Card>
     </div>
   );
 }
