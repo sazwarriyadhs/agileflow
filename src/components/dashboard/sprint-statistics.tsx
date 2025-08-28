@@ -1,16 +1,16 @@
 import { prisma } from '@/lib/prisma';
-import { UserStoryStatus } from '@prisma/client';
+import { USER_STORY_STATUS } from '@/lib/roles';
 import { StatCard } from './stat-card';
 
 async function getStats() {
     const backlogItems = await prisma.userStory.count({
-        where: { status: UserStoryStatus.Backlog }
+        where: { status: USER_STORY_STATUS.BACKLOG }
     });
     const inProgressItems = await prisma.userStory.count({
-        where: { status: UserStoryStatus.InProgress }
+        where: { status: USER_STORY_STATUS.IN_PROGRESS }
     });
     const completedItems = await prisma.userStory.count({
-        where: { status: UserStoryStatus.Done }
+        where: { status: USER_STORY_STATUS.DONE }
     });
     const latestVelocity = await prisma.sprintVelocity.findFirst({
         orderBy: { sprintNumber: 'desc' }
@@ -20,7 +20,7 @@ async function getStats() {
         backlogItems,
         inProgressItems,
         completedItems,
-        velocity: latestVelocity?.completed ?? 0
+        velocity: latestVelocity?.completedEffort ?? 0
     };
 }
 
