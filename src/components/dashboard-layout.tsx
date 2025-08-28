@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { usePathname, Link } from 'next-intl/navigation';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import {
   BarChart2,
   BotMessageSquare,
@@ -35,7 +36,6 @@ import {
 } from '@/components/ui/sidebar';
 import { Logo } from '@/components/icons';
 import { Button } from '@/components/ui/button';
-import { LanguageSwitcher } from './language-switcher';
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard' , icon: LayoutGrid},
@@ -136,7 +136,6 @@ export default function DashboardLayout({
                 {pathname.split('/').pop()?.replace('-', ' ') || 'Dashboard'}
               </h1>
             </div>
-            <LanguageSwitcher />
           </header>
           <main className="flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
         </SidebarInset>
