@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Role } from '@prisma/client';
+import { ROLES } from '@/lib/roles';
 
 function RegisterButton() {
   const { pending } = useFormStatus();
@@ -49,15 +49,15 @@ export default function RegisterPage() {
               </div>
                <div className="space-y-2">
                 <Label htmlFor="role">Role</Label>
-                 <Select name="role" required defaultValue={Role.user}>
+                 <Select name="role" required defaultValue={ROLES.USER}>
                   <SelectTrigger id="role">
                     <SelectValue placeholder="Select a role" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value={Role.scrum_master}>Scrum Master</SelectItem>
-                    <SelectItem value={Role.project_manager}>Project Manager</SelectItem>
-                    <SelectItem value={Role.developer}>Developer</SelectItem>
-                    <SelectItem value={Role.user}>Team Member</SelectItem>
+                    <SelectItem value={ROLES.SCRUM_MASTER}>Scrum Master</SelectItem>
+                    <SelectItem value={ROLES.PROJECT_MANAGER}>Project Manager</SelectItem>
+                    <SelectItem value={ROLES.DEVELOPER}>Developer</SelectItem>
+                    <SelectItem value={ROLES.USER}>Team Member</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
