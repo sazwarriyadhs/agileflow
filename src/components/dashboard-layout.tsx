@@ -46,14 +46,12 @@ import { Logo } from '@/components/icons';
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/dashboard/backlog', label: 'Product Backlog', icon: BookMarked },
-  { href: '/dashboard/sprint', label: 'Sprint Planning', icon: Calendar },
-  { href: '/dashboard/board', label: 'Kanban Board', icon: KanbanSquare },
-  { href: '/dashboard/chat-personnel', label: 'Chat Personnel', icon: MessageSquare },
-  { href: '/dashboard/assistant', label: 'Daily Assistant', icon: Bot },
-  { href: '/dashboard/retrospectives', label: 'Retrospectives', icon: Users },
+  { href: '/dashboard/backlog', label: 'Backlog', icon: BookMarked },
+  { href: '/dashboard/sprint', label: 'Sprints', icon: Calendar },
+  { href: '/dashboard/board', label: 'Board', icon: KanbanSquare },
   { href: '/dashboard/reports', label: 'Reports', icon: BarChart },
-  { href: '/dashboard/summary', label: 'Sprint Summary', icon: ClipboardList },
+  { href: '/dashboard/assistant', label: 'Assistant', icon: Bot },
+
 ];
 
 type User = {
