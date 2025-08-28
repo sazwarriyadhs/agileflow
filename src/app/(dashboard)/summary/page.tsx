@@ -27,7 +27,7 @@ export default function SprintSummaryPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('/api/summary');
+        const res = await fetch('/api/sprint-summary');
         if (!res.ok) {
           throw new Error('Failed to fetch sprint summary');
         }
