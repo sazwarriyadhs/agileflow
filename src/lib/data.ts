@@ -83,3 +83,9 @@ export const burndownData = [
   { day: 'Day 10', remaining: 4, ideal: 4 },
   { day: 'Day 11', remaining: 0, ideal: 0 },
 ];
+
+export const sprintSummaryData = [
+    { sprint_name: 'Sprint 1 - Foundation', total_tasks: 2, completed_tasks: 2, progress_percent: 100 },
+    { sprint_name: 'Sprint 2 - Core Features MVP', total_tasks: 3, completed_tasks: 1, progress_percent: 33 },
+    { sprint_name: 'Sprint 3 - Reporting & AI', total_tasks: 3, completed_tasks: 0, progress_percent: 0 },
+];

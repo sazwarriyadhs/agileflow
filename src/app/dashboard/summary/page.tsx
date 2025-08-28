@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import { sprintSummaryData } from '@/lib/data';
 
 type SummaryData = {
   sprint_name: string;
@@ -24,21 +25,14 @@ export default function SprintSummaryPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch('/api/sprint-summary');
-        if (!res.ok) {
-          throw new Error('Failed to fetch sprint summary');
-        }
-        const jsonData = await res.json();
-        setData(jsonData);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+    try {
+      // Using static data instead of fetching from API
+      setData(sprintSummaryData);
+    } catch (err: any) {
+      setError("Failed to load summary data");
+    } finally {
+      setLoading(false);
     }
-    fetchData();
   }, []);
 
   return (
