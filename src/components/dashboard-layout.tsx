@@ -8,7 +8,14 @@ import Image from 'next/image';
 import {
   Settings,
   Users,
-  GaugeCircle,
+  LayoutDashboard,
+  BookMarked,
+  Calendar,
+  KanbanSquare,
+  MessageSquare,
+  Bot,
+  BarChart,
+  ClipboardList,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -29,20 +36,20 @@ import {
   SidebarProvider,
   SidebarTrigger,
   SidebarFooter,
+  SidebarInset,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { SidebarInset } from '@/components/ui/sidebar';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard' },
-  { href: '/dashboard/backlog', label: 'Product Backlog' },
-  { href: '/dashboard/sprint', label: 'Sprint Planning' },
-  { href: '/dashboard/board', label: 'Kanban Board' },
-  { href: '/dashboard/chat-personnel', label: 'Chat Personnel' },
-  { href: '/dashboard/assistant', label: 'Daily Assistant' },
-  { href: '/dashboard/retrospectives', label: 'Retrospectives' },
-  { href: '/dashboard/reports', label: 'Reports' },
-  { href: '/dashboard/summary', label: 'Sprint Summary' },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/dashboard/backlog', label: 'Product Backlog', icon: BookMarked },
+  { href: '/dashboard/sprint', label: 'Sprint Planning', icon: Calendar },
+  { href: '/dashboard/board', label: 'Kanban Board', icon: KanbanSquare },
+  { href: '/dashboard/chat-personnel', label: 'Chat Personnel', icon: MessageSquare },
+  { href: '/dashboard/assistant', label: 'Daily Assistant', icon: Bot },
+  { href: '/dashboard/retrospectives', label: 'Retrospectives', icon: Users },
+  { href: '/dashboard/reports', label: 'Reports', icon: BarChart },
+  { href: '/dashboard/summary', label: 'Sprint Summary', icon: ClipboardList },
 ];
 
 export default function DashboardLayout({
@@ -71,7 +78,7 @@ export default function DashboardLayout({
                       tooltip={item.label}
                       className="font-medium"
                     >
-                      <GaugeCircle className="text-primary" />
+                      <item.icon className="text-primary" />
                       <span className="text-primary">{item.label}</span>
                     </SidebarMenuButton>
                   </Link>
