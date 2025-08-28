@@ -11,6 +11,8 @@ import {
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { sprintSummaryData } from '@/lib/data';
+import { Button } from '@/components/ui/button';
+import { FileDown } from 'lucide-react';
 
 type SummaryData = {
   sprint_name: string;
@@ -35,13 +37,42 @@ export default function SprintSummaryPage() {
     }
   }, []);
 
+  const exportToCSV = () => {
+    if (!data.length) return;
+
+    const headers = ['Sprint', 'Total Tasks', 'Completed Tasks', 'Progress (%)'];
+    const rows = data.map(row => [
+      `"${row.sprint_name.replace(/"/g, '""')}"`, // Escape double quotes
+      row.total_tasks,
+      row.completed_tasks,
+      row.progress_percent
+    ].join(','));
+
+    const csvContent = "data:text/csv;charset=utf-8," 
+      + [headers.join(','), ...rows].join('\n');
+      
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "sprint_summary.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight">Sprint Summary</h2>
-        <p className="text-muted-foreground">
-          A quick overview of each sprint's progress.
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Sprint Summary</h2>
+          <p className="text-muted-foreground">
+            A quick overview of each sprint's progress.
+          </p>
+        </div>
+        <Button onClick={exportToCSV}>
+          <FileDown className="mr-2 h-4 w-4" />
+          Export to CSV
+        </Button>
       </div>
 
       <Card>
