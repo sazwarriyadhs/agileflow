@@ -69,8 +69,8 @@ export default function DashboardLayout({
                       tooltip={item.label}
                       className="font-medium"
                     >
-                      <span className="text-2xl">{item.icon}</span>
-                      <span>{item.label}</span>
+                      <span className="text-2xl text-primary">{item.icon}</span>
+                      <span className="text-primary">{item.label}</span>
                     </SidebarMenuButton>
                   </Link>
                 </SidebarMenuItem>
