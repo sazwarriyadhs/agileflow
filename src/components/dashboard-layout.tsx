@@ -8,6 +8,7 @@ import Image from 'next/image';
 import {
   Settings,
   Users,
+  GaugeCircle,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -28,20 +29,20 @@ import {
   SidebarProvider,
   SidebarTrigger,
   SidebarFooter,
-  SidebarInset,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
+import { SidebarInset } from '@/components/ui/sidebar';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard' , icon: '📊'},
-  { href: '/dashboard/backlog', icon: '📑', label: 'Product Backlog' },
-  { href: '/dashboard/sprint', icon: '🗓️', label: 'Sprint Planning' },
-  { href: '/dashboard/board', icon: '🗂️', label: 'Kanban Board' },
-  { href: '/dashboard/chat-personnel', icon: '💬', label: 'Chat Personnel' },
-  { href: '/dashboard/assistant', icon: '🤖', label: 'Daily Assistant' },
-  { href: '/dashboard/retrospectives', icon: '👥', label: 'Retrospectives' },
-  { href: '/dashboard/reports', icon: '📈', label: 'Reports' },
-  { href: '/dashboard/summary', icon: '📋', label: 'Sprint Summary' },
+  { href: '/dashboard', label: 'Dashboard' },
+  { href: '/dashboard/backlog', label: 'Product Backlog' },
+  { href: '/dashboard/sprint', label: 'Sprint Planning' },
+  { href: '/dashboard/board', label: 'Kanban Board' },
+  { href: '/dashboard/chat-personnel', label: 'Chat Personnel' },
+  { href: '/dashboard/assistant', label: 'Daily Assistant' },
+  { href: '/dashboard/retrospectives', label: 'Retrospectives' },
+  { href: '/dashboard/reports', label: 'Reports' },
+  { href: '/dashboard/summary', label: 'Sprint Summary' },
 ];
 
 export default function DashboardLayout({
@@ -70,7 +71,7 @@ export default function DashboardLayout({
                       tooltip={item.label}
                       className="font-medium"
                     >
-                      <span className="text-2xl text-primary">{item.icon}</span>
+                      <GaugeCircle className="text-primary" />
                       <span className="text-primary">{item.label}</span>
                     </SidebarMenuButton>
                   </Link>
