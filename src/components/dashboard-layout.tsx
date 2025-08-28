@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   BarChart2,
   BotMessageSquare,
@@ -35,7 +36,6 @@ import {
   SidebarTrigger,
   SidebarFooter,
 } from '@/components/ui/sidebar';
-import { Logo } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 
 const menuItems = [
@@ -63,7 +63,7 @@ export default function DashboardLayout({
         <Sidebar>
           <SidebarHeader className="p-4">
             <div className="flex items-center gap-2">
-              <Logo className="w-8 h-8 text-primary" />
+              <Image src="/images/logo.png" width={32} height={32} alt="AgileFlow logo" />
               <span className="text-xl font-semibold text-primary group-data-[collapsible=icon]:hidden">
                 AgileFlow
               </span>
