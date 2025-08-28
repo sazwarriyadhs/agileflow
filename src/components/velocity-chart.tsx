@@ -25,9 +25,9 @@ export function VelocityChart() {
           }
           const rawData = await response.json();
           const formattedData = rawData.map((d: any) => ({
-            sprint: `Sprint ${d.sprint_number}`,
-            planned: d.planned_effort,
-            completed: d.completed_effort,
+            sprint: `Sprint ${d.sprintNumber}`,
+            planned: d.plannedEffort,
+            completed: d.completedEffort,
           }));
           setData(formattedData);
         } catch (err: any) {

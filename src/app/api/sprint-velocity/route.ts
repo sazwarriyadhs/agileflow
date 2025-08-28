@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 export async function GET() {
   try {
     const data = await prisma.$queryRaw`
-      SELECT * FROM sprint_velocity ORDER BY sprint_number;
+      SELECT sprint_number as "sprintNumber", planned_effort as "plannedEffort", completed_effort as "completedEffort" FROM sprint_velocity ORDER BY sprint_number;
     `;
     return NextResponse.json(data);
   } catch (err) {

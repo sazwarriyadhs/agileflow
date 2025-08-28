@@ -19,17 +19,15 @@ export function BurndownChart() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // In a real app, you'd fetch this from your API
-        // For now, we simulate a fetch
         const response = await fetch('/api/sprint-burndown?sprintId=sprint-2');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const rawData = await response.json();
         const formattedData = rawData.map((d: any) => ({
-            day: new Date(d.log_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric'}),
-            remaining: d.remaining_effort,
-            ideal: d.ideal_effort
+            day: new Date(d.logDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric'}),
+            remaining: d.remainingEffort,
+            ideal: d.idealEffort
         }));
         setData(formattedData);
       } catch (err: any) {

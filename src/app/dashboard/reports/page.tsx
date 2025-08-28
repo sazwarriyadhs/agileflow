@@ -11,9 +11,9 @@ import { saveAs } from 'file-saver';
 import { useEffect, useState } from 'react';
 
 type VelocityDataItem = {
-  sprint_number: number;
-  planned_effort: number;
-  completed_effort: number;
+  sprintNumber: number;
+  plannedEffort: number;
+  completedEffort: number;
 };
 
 export default function ReportsPage() {
@@ -52,7 +52,7 @@ export default function ReportsPage() {
     if(!velocityData.length) return;
     const data = [
       ['Sprint', 'Planned', 'Completed'],
-      ...velocityData.map(item => [item.sprint_number, item.planned_effort, item.completed_effort])
+      ...velocityData.map(item => [item.sprintNumber, item.plannedEffort, item.completedEffort])
     ];
   
     const worksheet = XLSX.utils.aoa_to_sheet(data);
