@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { usePathname, Link } from 'next-intl/client';
+import { usePathname, Link } from 'next-intl/navigation';
 import {
   BarChart2,
   BotMessageSquare,
