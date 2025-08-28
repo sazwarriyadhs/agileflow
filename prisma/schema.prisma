@@ -1,19 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+enum Role {
+  scrum_master
+  project_manager
+  developer
+  user
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
+  name      String
   email     String   @unique
   password  String
-  name      String
-  role      String
+  role      Role     @default(user)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  stories   UserStory[] @relation("Assignee")
+  TeamMember TeamMember[]
+}
+
+model Project {
+  id          String @id @default(uuid())
+  name        String
+  description String?
+  sprints     Sprint[]
+  userStories UserStory[]
+  teamMembers TeamMember[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model UserStory {
+  id          String      @id @default(uuid())
+  title       String
+  description String
+  status      String      // 'Todo', 'In Progress', 'Done', 'Backlog'
+  points      Int
+  epic        String?
+  assignee    User?       @relation("Assignee", fields: [assigneeId], references: [id])
+  assigneeId  String?
+  sprint      Sprint?     @relation(fields: [sprintId], references: [id])
+  sprintId    String?
+  project     Project     @relation(fields: [projectId], references: [id])
+  projectId   String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Sprint {
+  id          String      @id @default(uuid())
+  name        String
+  goal        String
+  startDate   DateTime
+  endDate     DateTime
+  stories     UserStory[]
+  project     Project     @relation(fields: [projectId], references: [id])
+  projectId   String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model TeamMember {
+  id        String    @id @default(uuid())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  project   Project   @relation(fields: [projectId], references: [id])
+  projectId String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([userId, projectId])
 }
