@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -57,7 +56,7 @@ export default function DashboardLayout({
         <Sidebar>
           <SidebarHeader className="p-4">
             <div className="flex items-center gap-2 px-6 py-4">
-              <Image src="/images/logo.png" width={32} height={32} alt="AgileFlow logo" />
+              <Image src="/images/logo.png" width={128} height={128} alt="AgileFlow logo" />
             </div>
           </SidebarHeader>
           <SidebarContent>
