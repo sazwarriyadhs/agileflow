@@ -3,9 +3,12 @@
 import { VelocityChart } from '@/components/velocity-chart';
 import { BurndownChart } from '@/components/burndown-chart';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Download, FileSpreadsheet } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import { velocityData } from '@/lib/data';
 
 export default function ReportsPage() {
   const exportPDF = () => {
@@ -28,6 +31,21 @@ export default function ReportsPage() {
     });
   };
 
+  const exportExcel = () => {
+    const data = [
+      ['Sprint', 'Planned', 'Completed'],
+      ...velocityData.map(item => [item.sprint, item.planned, item.completed])
+    ];
+  
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Velocity Report");
+  
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(blob, "velocity_report.xlsx");
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -37,10 +55,16 @@ export default function ReportsPage() {
             Analyze your team's performance and sprint progress.
           </p>
         </div>
-        <Button onClick={exportPDF}>
-          <Download className="mr-2 h-4 w-4" />
-          Export to PDF
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={exportPDF} variant="outline">
+            <Download className="mr-2 h-4 w-4" />
+            Export to PDF
+          </Button>
+          <Button onClick={exportExcel}>
+            <FileSpreadsheet className="mr-2 h-4 w-4" />
+            Export to Excel
+          </Button>
+        </div>
       </div>
 
       <div id="report-section">
