@@ -1,14 +1,14 @@
 {
   "Dashboard": {
-    "title": "Dasbor Scrum",
-    "subtitle": "Selamat datang di dasbor sprint Anda!",
+    "title": "Dasbor",
+    "subtitle": "Lacak progres sprint Anda di sini.",
     "burndown": "Grafik Burndown Sprint",
     "velocity": "Kecepatan Tim",
-    "cfd": "Diagram Alir Kumulatif",
+    "cfd": "Diagram Aliran Kumulatif",
     "switch": "Ubah ke Bahasa Inggris",
     "switchLocale": "en",
-    "reports": "Laporan & Grafik",
-    "reportsDescription": "Analisis kinerja tim dan kemajuan sprint Anda.",
-    "cfdDescription": "Visualisasikan alur kerja Anda dari waktu ke waktu."
+    "reports": "Laporan",
+    "reportsDescription": "Visualisasi performa sprint.",
+    "cfdDescription": "Menunjukkan distribusi status pekerjaan dari waktu ke waktu."
   }
 }
