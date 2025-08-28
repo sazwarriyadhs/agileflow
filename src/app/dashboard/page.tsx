@@ -22,9 +22,9 @@ export default function Dashboard() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
       {/* Project Overview */}
-      <Card className="lg:col-span-2">
+      <Card className="lg:col-span-2 shadow-md rounded-2xl border-l-4 border-primary">
         <CardHeader>
-          <CardTitle>Project Overview</CardTitle>
+          <CardTitle className="text-primary font-semibold">Project Overview</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-2">
@@ -37,9 +37,9 @@ export default function Dashboard() {
       </Card>
 
       {/* Recent Activity */}
-      <Card className="lg:col-span-2">
+      <Card className="lg:col-span-2 shadow-md rounded-2xl border-l-4 border-primary">
         <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
+          <CardTitle className="text-primary font-semibold">Recent Activity</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-2">
@@ -51,9 +51,9 @@ export default function Dashboard() {
       </Card>
 
       {/* Sprint Statistics */}
-      <Card className="lg:col-span-2">
+      <Card className="lg:col-span-2 shadow-md rounded-2xl border-l-4 border-primary">
         <CardHeader>
-          <CardTitle>Sprint Statistics</CardTitle>
+          <CardTitle className="text-primary font-semibold">Sprint Statistics</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-2 gap-4">
           <div className="p-4 bg-muted rounded-xl text-center">
@@ -76,9 +76,9 @@ export default function Dashboard() {
       </Card>
 
       {/* Chat Personel */}
-      <Card className="lg:col-span-2 flex flex-col">
+      <Card className="lg:col-span-2 flex flex-col shadow-md rounded-2xl border-l-4 border-primary">
         <CardHeader>
-          <CardTitle>Team Chat</CardTitle>
+          <CardTitle className="text-primary font-semibold">Team Chat</CardTitle>
         </CardHeader>
         <CardContent className="flex-1 overflow-y-auto max-h-64 space-y-2">
           <ScrollArea className="h-full pr-2">
