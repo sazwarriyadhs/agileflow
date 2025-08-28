@@ -1,7 +1,8 @@
 
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { registerUser } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,7 +23,7 @@ function RegisterButton() {
 }
 
 export default function RegisterPage() {
-  const [errorMessage, dispatch] = useFormState(registerUser, undefined);
+  const [errorMessage, dispatch] = useActionState(registerUser, undefined);
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-background p-4">
