@@ -5,15 +5,8 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
-  BarChart2,
-  BotMessageSquare,
-  ClipboardList,
-  LayoutGrid,
-  Layers,
   Settings,
   Users,
-  ClipboardCheck,
-  MessageSquare,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -28,26 +21,26 @@ import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
-  SidebarInset,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
   SidebarFooter,
+  SidebarInset,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard' , icon: LayoutGrid},
-  { href: '/dashboard/backlog', icon: Layers, label: 'Product Backlog' },
-  { href: '/dashboard/sprint', icon: ClipboardList, label: 'Sprint Planning' },
-  { href: '/dashboard/board', icon: LayoutGrid, label: 'Kanban Board' },
-  { href: '/dashboard/chat-personnel', icon: MessageSquare, label: 'Chat Personnel' },
-  { href: '/dashboard/assistant', icon: BotMessageSquare, label: 'Daily Assistant' },
-  { href: '/dashboard/retrospectives', icon: Users, label: 'Retrospectives' },
-  { href: '/dashboard/reports', icon: BarChart2, label: 'Reports' },
-  { href: '/dashboard/summary', icon: ClipboardCheck, label: 'Sprint Summary' },
+  { href: '/dashboard', label: 'Dashboard' , icon: '📊'},
+  { href: '/dashboard/backlog', icon: '📑', label: 'Product Backlog' },
+  { href: '/dashboard/sprint', icon: '🗓️', label: 'Sprint Planning' },
+  { href: '/dashboard/board', icon: '🗂️', label: 'Kanban Board' },
+  { href: '/dashboard/chat-personnel', icon: '💬', label: 'Chat Personnel' },
+  { href: '/dashboard/assistant', icon: '🤖', label: 'Daily Assistant' },
+  { href: '/dashboard/retrospectives', icon: '👥', label: 'Retrospectives' },
+  { href: '/dashboard/reports', icon: '📈', label: 'Reports' },
+  { href: '/dashboard/summary', icon: '📋', label: 'Sprint Summary' },
 ];
 
 export default function DashboardLayout({
@@ -62,8 +55,9 @@ export default function DashboardLayout({
       <div className="flex h-screen">
         <Sidebar>
           <SidebarHeader className="p-4">
-            <div className="flex items-center gap-2">
-              <Image src="/images/logo.png" width={128} height={128} alt="AgileFlow logo" />
+            <div className="flex items-center gap-2 px-6 py-4">
+              <Image src="/images/logo.png" width={32} height={32} alt="AgileFlow logo" className="h-8" />
+              <span className="text-brand font-bold text-lg">AgileFlow</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -74,8 +68,9 @@ export default function DashboardLayout({
                     <SidebarMenuButton
                       isActive={pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href))}
                       tooltip={item.label}
+                      className="font-medium"
                     >
-                      <item.icon />
+                      <span className="text-2xl">{item.icon}</span>
                       <span>{item.label}</span>
                     </SidebarMenuButton>
                   </Link>

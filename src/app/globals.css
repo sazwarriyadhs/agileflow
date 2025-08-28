@@ -4,20 +4,20 @@
 
 @layer base {
   :root {
-    --background: 220 100% 98%; /* brand.accent */
+    --background: 48 83% 97%; /* brand.accent */
     --foreground: 222 47% 11%;
-    --card: 220 100% 98%; /* brand.accent */
+    --card: 0 0% 100%; /* white */
     --card-foreground: 222 47% 11%;
-    --popover: 220 100% 98%; /* brand.accent */
+    --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     --primary: 217 100% 41%; /* brand.DEFAULT */
-    --primary-foreground: 210 40% 98%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 217 33% 94%;
     --secondary-foreground: 222 47% 11%;
     --muted: 217 33% 94%;
     --muted-foreground: 215 16% 47%;
-    --accent: 217 33% 90%;
-    --accent-foreground: 222 47% 11%;
+    --accent: 48 83% 97%; /* brand.accent */
+    --accent-foreground: 217 71% 28%; /* brand.dark */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     --border: 217 33% 88%;
@@ -29,14 +29,14 @@
     --chart-3: 217 60% 61%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --sidebar-background: 217 100% 41%; /* brand.DEFAULT */
-    --sidebar-foreground: 0 0% 100%; /* White */
-    --sidebar-primary: 210 40% 98%; /* White text for active items */
-    --sidebar-primary-foreground: 217 100% 41%; /* brand.DEFAULT for active item text */
-    --sidebar-accent: 217 91% 60%; /* brand.light for hover */
-    --sidebar-accent-foreground: 0 0% 100%; /* White text on hover */
-    --sidebar-border: 217 100% 41%; /* brand.DEFAULT */
-    --sidebar-ring: 210 40% 98%; /* White */
+    --sidebar-background: 0 0% 100%; /* White */
+    --sidebar-foreground: 217 100% 41%; /* brand.DEFAULT */
+    --sidebar-primary: 210 40% 98%; 
+    --sidebar-primary-foreground: 217 100% 41%;
+    --sidebar-accent: 48 83% 97%; /* brand.accent */
+    --sidebar-accent-foreground: 217 71% 28%; /* brand.dark */
+    --sidebar-border: 220 13% 91%; /* gray-200 */
+    --sidebar-ring: 210 40% 98%;
   }
   .dark {
     --background: 222 47% 11%;
