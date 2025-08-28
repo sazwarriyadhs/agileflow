@@ -11,6 +11,7 @@ import {
   Layers,
   Settings,
   Users,
+  ClipboardCheck,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -44,6 +45,7 @@ const menuItems = [
   { href: '/dashboard/assistant', icon: BotMessageSquare, label: 'Daily Assistant' },
   { href: '/dashboard/retrospectives', icon: Users, label: 'Retrospectives' },
   { href: '/dashboard/reports', icon: BarChart2, label: 'Reports' },
+  { href: '/dashboard/summary', icon: ClipboardCheck, label: 'Sprint Summary' },
 ];
 
 export default function DashboardLayout({
