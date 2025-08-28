@@ -1,22 +1,22 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { useState } from 'react';
 
 export default function Dashboard() {
   const [messages, setMessages] = useState([
-    { sender: "Alice", text: "Hey team, daily standup at 9 AM." },
-    { sender: "Bob", text: "Noted, thanks Alice!" },
+    { sender: 'Alice', text: 'Hey team, daily standup at 9 AM.' },
+    { sender: 'Bob', text: 'Noted, thanks Alice!' },
   ]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState('');
 
   const handleSend = () => {
     if (!newMessage.trim()) return;
-    setMessages([...messages, { sender: "You", text: newMessage }]);
-    setNewMessage("");
+    setMessages([...messages, { sender: 'You', text: newMessage }]);
+    setNewMessage('');
   };
 
   return (
@@ -100,9 +100,9 @@ export default function Dashboard() {
                   <div
                     key={idx}
                     className={`p-2 rounded-lg ${
-                      msg.sender === "You"
-                        ? "bg-primary text-primary-foreground ml-auto w-fit"
-                        : "bg-muted w-fit"
+                      msg.sender === 'You'
+                        ? 'bg-primary text-primary-foreground ml-auto w-fit'
+                        : 'bg-muted w-fit'
                     }`}
                   >
                     <strong>{msg.sender}: </strong>
@@ -116,7 +116,7 @@ export default function Dashboard() {
                 placeholder="Type a message..."
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               />
               <Button onClick={handleSend}>Send</Button>
             </div>

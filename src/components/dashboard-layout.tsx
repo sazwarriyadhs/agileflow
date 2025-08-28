@@ -12,6 +12,7 @@ import {
   Settings,
   Users,
   ClipboardCheck,
+  MessageSquare,
 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -42,6 +43,7 @@ const menuItems = [
   { href: '/dashboard/backlog', icon: Layers, label: 'Product Backlog' },
   { href: '/dashboard/sprint', icon: ClipboardList, label: 'Sprint Planning' },
   { href: '/dashboard/board', icon: LayoutGrid, label: 'Kanban Board' },
+  { href: '/dashboard/chat-personnel', icon: MessageSquare, label: 'Chat Personnel' },
   { href: '/dashboard/assistant', icon: BotMessageSquare, label: 'Daily Assistant' },
   { href: '/dashboard/retrospectives', icon: Users, label: 'Retrospectives' },
   { href: '/dashboard/reports', icon: BarChart2, label: 'Reports' },
