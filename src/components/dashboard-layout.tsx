@@ -35,6 +35,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
   SidebarFooter,
+  SidebarInset,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 
@@ -128,7 +129,7 @@ export default function DashboardLayout({
             </DropdownMenu>
           </SidebarFooter>
         </Sidebar>
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
+        <SidebarInset>
           <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
             <SidebarTrigger className="md:hidden" />
             <div className="flex-1">
@@ -137,8 +138,8 @@ export default function DashboardLayout({
               </h1>
             </div>
           </header>
-          <div className="p-4 sm:p-6">{children}</div>
-        </main>
+          <main className="flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
+        </SidebarInset>
       </div>
     </SidebarProvider>
   );
