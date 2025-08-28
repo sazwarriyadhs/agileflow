@@ -63,10 +63,7 @@ export default function DashboardLayout({
         <Sidebar>
           <SidebarHeader className="p-4">
             <div className="flex items-center gap-2">
-              <Image src="/images/logo.png" width={32} height={32} alt="AgileFlow logo" />
-              <span className="text-xl font-semibold text-primary group-data-[collapsible=icon]:hidden">
-                AgileFlow
-              </span>
+              <Image src="/images/logo.png" width={128} height={128} alt="AgileFlow logo" />
             </div>
           </SidebarHeader>
           <SidebarContent>
