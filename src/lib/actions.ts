@@ -87,6 +87,9 @@ export async function authenticate(prevState: string | undefined, formData: Form
         return 'Invalid credentials.';
     }
   } catch (error) {
+    if ((error as Error).message.includes('CredentialsSignin')) {
+      return 'Invalid credentials.';
+    }
     console.error(error);
     return 'Something went wrong. Please try again.';
   }
