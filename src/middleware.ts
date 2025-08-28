@@ -1,14 +1,16 @@
 import createMiddleware from 'next-intl/middleware';
-
-export default createMiddleware({
-  // A list of all locales that are supported
+import { NextRequest } from 'next/server';
+ 
+const intlMiddleware = createMiddleware({
   locales: ['en', 'id'],
-
-  // Used when no locale matches
   defaultLocale: 'en',
 });
 
+export default function middleware(req: NextRequest) {
+  return intlMiddleware(req);
+}
+ 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/', '/(id|en)/:path*'],
+  matcher: ['/', '/(id|en)/:path*']
 };

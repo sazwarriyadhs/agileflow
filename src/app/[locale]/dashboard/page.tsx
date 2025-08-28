@@ -1,7 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'next-intl/client';
+import { usePathname, useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import { VelocityChart } from '@/components/velocity-chart';
 import { BurndownChart } from '@/components/burndown-chart';
@@ -11,9 +12,13 @@ export default function DashboardPage() {
   const t = useTranslations('Dashboard');
   const router = useRouter();
   const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
 
   const switchLocale = (locale: 'en' | 'id') => {
-    router.replace(pathname, { locale });
+    startTransition(() => {
+        const newPath = pathname.replace(/^\/(en|id)/, `/${locale}`);
+        router.replace(newPath);
+    });
   };
 
   return (
@@ -23,7 +28,7 @@ export default function DashboardPage() {
           <h2 className="text-2xl font-bold tracking-tight">{t('title')}</h2>
           <p className="text-muted-foreground">{t('subtitle')}</p>
         </div>
-        <Button onClick={() => switchLocale(t('switchLocale') as 'en' | 'id')} variant="outline">
+        <Button onClick={() => switchLocale(t('switchLocale') as 'en' | 'id')} variant="outline" disabled={isPending}>
           {t('switch')}
         </Button>
       </div>
