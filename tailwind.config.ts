@@ -25,6 +25,12 @@ export default {
         code: ['monospace'],
       },
       colors: {
+        brand: {
+          DEFAULT: "#0056D2",   // Biru utama dari logo
+          light: "#4D8DFF",     // Variasi lebih terang
+          dark: "#003A99",      // Variasi lebih gelap
+          accent: "#F5F9FF"     // Background lembut
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
